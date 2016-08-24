@@ -1,0 +1,495 @@
+﻿/*
+Theme Name:     Medicinska-TwentyTwelve
+Author:         Nils Gustafsson
+Template:       twentytwelve
+Description: 	Ett child-tema baserat på TwentyTwelve skapat åt Umeå Medicinska Studentkår. 
+Version:        1.2.0
+License:        GNU General Public License v2 or later
+License URI: 	http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+
+/* 
+Changelog:		1.2.0:	Förbättrat stöd för touch display. Kod optimering och förbättrad kommentering.
+				1.1.2: 	Uppdaterat stöd för ny kalender plugin (Event Manager)och förbättrat stöd för språkbyte samt sökruta i menyn på högupplösta skärmar.
+				1.1.1:  Stöd för TwentyTwelve 2.1	
+				1.1.0:  Uppdatering för att passa TwentyTwelve 2.0. Uppdatering för att stödja 2K mobilskärmar i porträttläge.        
+				1.0.7:  Typsnitt i tabeller
+				1.0.6:  Anpassning av Event-organisers fullcalander för att passa tema.
+				1.0.5:  Fixar skillnader i storlek på typsnitt på vissa webläsare.	
+				1.0.4:  Fixar problem med Safari på vissa Macar.
+				1.0.3:  Rensning av kod och uppdatering av vissa funktioner. Förbättrat stöd för iphone 4 & 5
+				1.0.2:  Fixade att mobilmenyn inte kom fram vid smala skärmar, samt hur headern skalas för små skärmar.
+				1.0.1:  Fixade widgetarnas färger och rubrikerna i kalender event
+				1.0.0:  Ursprunglig release
+				
+Hemsidans första upplaga byggdes under december 2015. Den bygger på TwenyTwelve som underhålls av Wordpress. Tanken med detta är att göra hemsidan så långsiktig som möjligt. 
+Detta är ett child tema och justerar vissa mindre detaljer i temat framförallt menyn och widgetarna. I övrigt så justerar den också fonten till "Roboto" detta följer inte 
+den grafiskaprofilen men godkändes av Kårstyrelsen december 2015. Temat är rikligt kommenterat för att det ska lätt att göra justeringar. Header använder temat för uppladdning 
+av ny bild. För att lägga till sponsorer krävs att kod med länkar till bilderna läggs till i footer.php.
+
+*/
+
+/*
+1. 	Generella inställningar /  Site style
+2.	Header & footer
+3.	Widgets
+4.	Media queries
+	4.1 Huvudmenu
+	4.2 Små skärmar
+*/
+
+
+/* Importerar Roboto fontet från Google till sidan */
+@import url(https://fonts.googleapis.com/css?family=Roboto:500,300);
+
+/* 1. Site style */
+
+.site {
+	margin: 0 auto;
+	max-width: 73rem; 								/*Bredd på hela sidan */
+	padding: 11px 44px !important;
+	padding: 0.714285714rem 2.8rem !important; 		/*ökar paddingen på sidan */
+	overflow: hidden;
+	}
+.entry-header .entry-title a { 						/* Färg på länkarna i rurikerna  */
+	color: #50b788;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 26px;
+	}
+.entry-title { 									/* Nyhetsrubriker */
+	font-size: 26px !important;
+	font-family: 'Roboto', sans-serif !important;
+	font-weight: 500 !important;
+	}
+.site-content article {  							/* Utseendet på nyheterna och hur de förhåller sig till varandra*/
+	border-bottom: 4.854101966px;
+	margin-bottom: 72px;
+	margin-bottom: 0.809016994rem;
+	padding-bottom: 24px;
+	padding-bottom: 0.809016994rem;
+	font-size: 14px !important; 
+	}
+strong, b, bold { 									/* Hur ser fetstilen ut  */
+	font-weight: 500 !important;
+	font-family: 'Roboto', sans-serif;
+	}
+small { 											/* storlek på namn i meta (namn och datum under titel)*/
+	font-size: 14px !important;
+	}
+.entry-content table, caption, th, td { 			/* typsnitt och storlek i tabeller*/
+	font-size: 14px !important;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300 !important;
+	}
+.site-content {
+	margin: 24px 0 0;
+	margin: 0.5rem 0.5rem;
+	}
+.site h1, h2, h3, h4, h5, h6 {
+	clear: both;
+	color: #50b788;
+	font-weight: 500;
+	}
+hr {  												/*linjerna runt författarnamn och datum */
+	display: block;
+	margin-top: 0.8em;
+	margin-bottom:  0.8em;
+	margin-left: auto;
+	margin-right: auto;
+	border-width: 0.5px;
+	box-shadow: none;
+	color: #f8f8f8;
+	}
+body .site {										/* Tar den överliggande skuggan på hela sidan och tar bort den helt i headern */
+	box-shadow: 0px;
+	margin-bottom: 1.42857rem;
+	margin-top: 1.42857rem;
+	padding: 0 1.85714rem;
+	border-radius: 5px;
+	}
+
+body a, body a:visited, 				/* färg Länkar i event */
+.entry-content a:visited, 
+.comment-content a:visited,
+.comments-link a,
+.entry-meta a   { 						/* Färg på länkarna på hela sidan  */
+	color: #50b788;
+	text-decoration: none;
+}
+#nav-below.navigation {
+	font-size: 14px !important; 
+	}
+
+body, input, textarea, body.custom-font-enabled, .page-title span, .pingback a.url, .entry-content code, 
+.comment-content code, .entry-content pre, .comment-content pre, .site-content article  { /
+	font-family: 'Roboto', sans-serif;	* Ändrar fonten på hela sidan */
+	font-weight: 300;
+	}
+img.header-image, img  {						/* Tar bort skuggan helt i headern */
+	box-shadow: none !important;
+	margin-top: 0px !important;
+	margin-top: 0rem !important;
+	border-radius: 5px;
+	}
+
+/* 2. Header & footer*/	
+
+.headerlinks .left {							/* Skapar nya klasser för länkarna i headern */
+    float:left;
+    width: 49%;
+	}
+.headerlinks .right {
+    float:right;
+    width: 49%;
+	}
+article.sticky .featured-post {					/* Tar bort "utvalda poster" */
+	display: none;
+	}
+.footer_sponsors {
+	width: 100%;
+	height: 100%;
+	margin-top: -25px; 							/* Half the height */
+	vertical-align: top;
+	}
+.header_small_screen {							/* Hanterar vad som händer om bredden blir låg */
+	position:relative;
+	display: block;
+	margin-top: 20px;
+	width: 100% !important;
+	height: 175px !important;
+    overflow: hidden;
+	}
+footer[role="contentinfo"] {					/* Footer och framförallt texten */
+	border-top: 1px solid #50b788; 				/* färg på linjen som skiljer sponsorerna från innehållet */
+	clear: both;
+	font-size: 14px !important; 
+	font-family: 'Roboto', sans-serif!important;
+	font-weight: 300 !important;
+	line-height: 2;
+	margin-top: 24px;
+	margin-top: 1.714285714rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 24px 0;
+	padding: 1.714285714rem 0;
+	}
+
+/* 3. Widgets */
+
+.fc-event {	/* färg på boxar i full kalender */
+    background-color: #50b788 !important;
+	border-color: #50b788 !important;
+	}
+.widget-area {
+    margin: 0.5rem 0 0;
+	}
+.widget-area .widget {
+	-webkit-hyphens: auto;						/* Avstavning */
+	-moz-hyphens: auto;							/* Avstavning */
+	hyphens: auto;
+	margin-bottom: 30px;						/* Avståndet mellan widgetar */
+	margin-bottom: 2rem;
+	word-wrap: normal;							/* Avstavning */
+	border: 1px solid #50b788; 					/* Border på hela widgeten */
+	border-radius: 5px;							/* Rundning på widgetar */
+	padding: 15px 15px 15px 15px; 				/* padding på widgetar */
+	}
+.widget-area .widget h3 {						/*Rubriken i widgetar */
+	margin-bottom: 10px;
+	margin-bottom: 0.4rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 18px;
+	color: #464646 !important;
+	}
+.widget-area .widget p,
+.widget-area .widget li,
+.widget-area .widget .textwidget {
+	font-size: 14px !important; 				/* text storlek i widgetar */
+	line-height: 1.846153846;
+	}
+.widget-area .widget p {
+	margin-bottom: 18px;
+	margin-bottom: 1.714285714rem;
+	}
+.widget-area .textwidget ul {
+	list-style: disc outside;
+	margin: 0 0 18px;
+	margin: 0 0 1.714285714rem;
+	}
+.widget-area .textwidget li {
+	margin-left: 36px;
+	margin-left: 2.571428571rem;
+	}
+.widget-area .textwidget a {
+	color: #50b788;
+	}
+.widget-area .widget a { 						/* alla .widget a beskriver länkarna i widgetar */
+	color: #50b788;
+	text-decoration: none;
+	}
+.widget-area .widget a:hover {
+	color: #50b788;
+	text-decoration: none;
+	}
+.widget-area .widget a:visited {
+	color: #50b788;
+	text-decoration: none;
+	}
+.widget-area #s {
+	width: 53.66666666666%; 					/* define a width to avoid dropping a wider submit button */
+	}
+	
+/* 4. Media queries */ 
+
+@media screen and (min-width: 774px) { 			/* Skärmar över 774 px*/
+#shiftnav-main {								/* Visar INTE Shiftnav på vanliga datorskärmar med hög bredd */
+    display: none !important;
+    }
+#shiftnav-toggle-main {
+    display: none !important;
+    }
+.header_small_screen {							/* Visar INTE specialheader på vanliga datorskärmar med hög bredd */
+	display:none !important;
+	}
+
+/* 4.1 Huvudmeny och dess bas inställningar så som border och bakgrund */
+
+.main-navigation {
+	margin-top: 0.5rem !important; 				/* tar bort avståendet mellan menyn och header bilden */
+	}
+.main-navigation ul.nav-menu,
+.main-navigation div.nav-menu > ul {
+    display: inline-block !important;
+	background: none repeat scroll 0 0 #f8f8f8;
+    text-align: left;
+    width: 100%; 								/* Att menyn stäcker hela bredden */
+	border: 1px solid #ededed;					/* Att menyn en border */
+	border-radius: 5px; 						/* Att menyn har rundade hörn */
+	}
+.main-navigation ul {
+	text-indent: 0;
+	}
+.main-navigation li a,
+.main-navigation li {
+    display: inline-block;
+	font-size: 14px !important;  				/* Ökar teckenstorleken på menyn */
+    text-decoration: none;
+    margin: 0 16px;
+    margin: 0 1.1428571429rem;
+	}
+.main-navigation li a {							/* Textfärg i huvudmenyn, att den presenteras som skriven, padding för huvudmenyn*/
+    border-bottom: 0;
+    color: #6a6a6a;
+    padding: 3px 0;
+	text-transform: none !important;
+    white-space: nowrap;
+	}
+.main-navigation li a:hover,.main-navigation li a:focus  {	/*Hover i huvudmenyn textens färg*/
+	color: #50b788;
+	}
+.main-navigation li {
+    position: relative;
+    margin: 0;
+	}		
+.main-navigation li:hover,.main-navigation li:focus {		/* Bakgrund om du befinner dig i sub-meny */
+	background: #efefef;
+	}
+.main-navigation li ul {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+	}
+.main-navigation li ul ul {
+    top: 0;
+    left: 100%;
+	}
+.main-navigation ul li:hover > ul,.main-navigation ul li:focus > ul {
+    border-left: 0;
+    display: block;
+	}
+.main-navigation li ul li a {								/* bagrund, bredd samt border i sub-meny */
+    background: #ffffff ;
+    border-right: 1px solid #50b788;  						/*Höger och vänster boder i sub-meny*/
+	border-left: 1px solid #50b788;
+    display: block;
+    font-size: 13px !important; 
+    min-width: 175px;										/*bredden på undermenyn */
+    white-space: normal;	
+    margin: 0;
+    padding: 12px 5px;
+    hyphens: auto;
+    word-break: normal;										/* avstavning */
+    word-wrap: normal;
+	}
+.main-navigation li ul li a:hover,.main-navigation li ul li a:focus  {
+    background: #50b788;									/*Hover sub-meny*/
+	color: #f8f8f8;
+	}
+.main-navigation li ul li:first-child a {					/* top och botten border på undermenyn */
+	border-top : 1px solid #50b788;
+	}
+.main-navigation li ul li:last-child a {
+	border-bottom : 1px solid #50b788;
+	}
+.main-navigation .current-menu-item > a,					/* Aktiv sida färg på texten */
+.main-navigation .current-menu-ancestor > a,
+.main-navigation .current_page_item > a,
+.main-navigation .current_page_ancestor > a {
+    color: #50b788;
+    font-weight: 500 !important;
+	}
+#menu-huvudmeny > li:last-child {							/* Flyttar sökrutan till höger förutsatt att den är last-child. Om den avlägsnas måste denna tas bort */
+	float: right;
+   	padding: 13px;
+	background: #f8f8f8;
+}
+.menu-toggle {												/* Visa inte 2012s mobilmeny */
+	display: none;
+	}
+.widget-area {												/* Sidebar begränsar bredden på sidebaren vid hög bredd*/
+	width: 30% !important; 									/* Bredden på sidebaren som max gäller bara vid datorskärm */
+	margin-left: 15px !important;
+	}
+}
+
+/*4.2 Små skärmar*/
+
+@media screen and (max-width: 1050px) {			/* Tarbort sökrutan när skärmen blir för smal */
+#searchform {
+  display: none;
+ }
+}
+
+@media screen and (max-width: 774px) {  		/*smala skärmar med "låg" dpi*/
+ .main-navigation {								/*visa bara ShiftNav */
+  display: none !important;
+ }
+ .menu-toggle {
+  display: none;
+ }
+#searchform {
+  display: none;
+ }
+img.header-image  {  							/*tar bort onödigt gojs och ger innnehållet mera plats */  
+	display: none;								/*visa inte header */
+	}
+body .site {
+	box-shadow: 0px;
+	margin-bottom: 0rem;
+	margin-top: 0rem;
+	padding: 0 0rem;
+	border-radius: 0px;
+	}
+.widget-area {
+	width: 100% !important; 					/* Bredden på sidebaren stäcker sig över hela */
+	margin: auto;
+	}
+.site-content {
+	width: 100% !important; 					/* Bredden på inläggen stäcker sig över hela */
+	padding-top: 30px !important; 				/* flyttar ner från länkarna i headern ovan något */
+	margin: auto;
+	}
+}	
+
+/* 4.3 Mobilskärmar */
+
+@media (min-resolution: 220dpi) { 				
+.nav-menu {										/* Visar enbart ShiftNav */
+	display:none !important;
+	}
+.main-navigation {
+	display:none !important;
+	}
+#searchform {
+  display: none;
+ }
+.header_small_screen {							/* tar bort headers och gojs för att mer yta ska frigöras*/
+	display:none !important;
+	}
+img.header-image  {
+	display: none;
+	}
+body .site {
+	box-shadow: 0px;
+	margin-bottom: 0rem;
+	margin-top: 0rem;
+	padding: 0 0rem;
+	border-radius: 0px;
+	}
+.widget-area {
+	width: 100% !important; 					/* Bredden på sidebaren stäcker sig över hela och hamnar under content */
+	}
+.site-content {
+	width: 100% !important; 					/* Bredden på inläggen stäcker sig över hela */
+	padding-top: 30px !important; 				/* flyttar ner från länkarna i headern ovan något */
+	margin: auto;
+	}
+}
+
+@media screen 									/* Iphone 1 - 5/5s/5c speciallösning*/
+and (min-device-width : 320px) 
+and (max-device-width : 568px) { 
+.nav-menu {										/* Visar enbart ShiftNav */
+	display:none !important;
+	}
+.main-navigation {
+	display:none !important;
+	}
+#searchform {
+	display: none;
+	}
+.header_small_screen {							/* tar bort headers och gojs för att mer yta ska frigöras*/
+	display:none !important;
+	}
+img.header-image  {
+	display: none !important;
+	}
+body .site {
+	box-shadow: 0px;
+	margin: 0rem;
+	padding: 0 0rem;
+	border-radius: 0rem;
+	font-size: 14px !important; 
+	}
+.widget-area {
+	width: 100% !important; 					/* Bredden på sidebaren stäcker sig över hela och hamnar under content */
+	margin: auto;
+	}
+.site-content {
+	width: 100% !important; 					/* Bredden på inläggen stäcker sig över hela */
+	padding-top: 30px !important; 				/* flyttar ner från länkarna i headern ovan något */
+	margin: 0rem;
+	}
+.headerlinks .left {
+    float:left;
+    width: 30%;
+	}
+.headerlinks .right {
+    float:right;
+    width: 70%;
+	}
+.site-content article {  						/* Hur ser postarna ut  */
+	border-bottom: 4.854101966px;
+	margin-bottom: 20px;
+	margin-bottom: 0.109016994rem;
+	padding-bottom: 24px;
+	padding-bottom: 0.109016994rem;
+	padding-left: 0.1rem;
+	padding-right: 0.1rem;
+	}
+.footer_sponsors {
+	position:relative;
+	display: block;
+	margin-top: 0px;
+	width: 100% !important;
+    overflow: hidden;
+	}
+}
+
